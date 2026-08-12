@@ -1,14 +1,16 @@
-<!DOCTYPE html><html lang="en"><head>
-<meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Premium FLAMES Calculator</title>
 <!-- Google Fonts -->
-<link href="https://fonts.googleapis.com" rel="preconnect">
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&amp;family=Plus+Jakarta+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&amp;family=Plus+Jakarta+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
 <!-- Material Symbols -->
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <!-- Tailwind CSS -->
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <!-- html2canvas -->
@@ -213,18 +215,16 @@
 </head>
 <body class="bg-transparent min-h-screen flex flex-col relative overflow-hidden text-surface-container-lowest font-body-md">
 <!-- Background WebGL Shader Canvas -->
-<canvas class="fixed inset-0 w-full h-full z-[-2] pointer-events-none" id="bg-canvas" width="390" height="906"></canvas>
+<canvas class="fixed inset-0 w-full h-full z-[-2] pointer-events-none" height="906" id="bg-canvas" width="390"></canvas>
 <!-- Background Floating Hearts Container -->
-<div class="absolute inset-0 z-0 pointer-events-none overflow-hidden" id="hearts-container"><span class="material-symbols-outlined floating-heart" style="font-variation-settings: &quot;FILL&quot; 1; font-size: 27.6063px; left: 97.3242vw; animation-duration: 23.9953s; animation-delay: -13.4282s;">favorite</span><span class="material-symbols-outlined floating-heart" style="font-variation-settings: &quot;FILL&quot; 1; font-size: 40.4605px; left: 29.1977vw; animation-duration: 24.3513s; animation-delay: -16.6819s;">favorite</span><span class="material-symbols-outlined floating-heart" style="font-variation-settings: &quot;FILL&quot; 1; font-size: 20.4926px; left: 46.9281vw; animation-duration: 24.2988s; animation-delay: -1.55015s;">favorite</span><span class="material-symbols-outlined floating-heart" style="font-variation-settings: &quot;FILL&quot; 1; font-size: 28.6576px; left: 95.8929vw; animation-duration: 12.7945s; animation-delay: -8.84751s;">favorite</span><span class="material-symbols-outlined floating-heart" style="font-variation-settings: &quot;FILL&quot; 1; font-size: 23.2879px; left: 88.6268vw; animation-duration: 12.6624s; animation-delay: -16.9326s;">favorite</span><span class="material-symbols-outlined floating-heart" style="font-variation-settings: &quot;FILL&quot; 1; font-size: 22.1102px; left: 45.3049vw; animation-duration: 11.1348s; animation-delay: -6.10169s;">favorite</span><span class="material-symbols-outlined floating-heart" style="font-variation-settings: &quot;FILL&quot; 1; font-size: 38.6098px; left: 9.35729vw; animation-duration: 11.733s; animation-delay: -16.2692s;">favorite</span><span class="material-symbols-outlined floating-heart" style="font-variation-settings: &quot;FILL&quot; 1; font-size: 25.6624px; left: 10.184vw; animation-duration: 10.2739s; animation-delay: -14.1857s;">favorite</span><span class="material-symbols-outlined floating-heart" style="font-variation-settings: &quot;FILL&quot; 1; font-size: 37.2532px; left: 63.2101vw; animation-duration: 23.1716s; animation-delay: -11.7142s;">favorite</span><span class="material-symbols-outlined floating-heart" style="font-variation-settings: &quot;FILL&quot; 1; font-size: 26.1838px; left: 64.505vw; animation-duration: 10.7601s; animation-delay: -2.64205s;">favorite</span><span class="material-symbols-outlined floating-heart" style="font-variation-settings: &quot;FILL&quot; 1; font-size: 49.1573px; left: 99.3964vw; animation-duration: 24.1717s; animation-delay: -6.71131s;">favorite</span><span class="material-symbols-outlined floating-heart" style="font-variation-settings: &quot;FILL&quot; 1; font-size: 44.6208px; left: 16.2646vw; animation-duration: 20.9516s; animation-delay: -5.51816s;">favorite</span><span class="material-symbols-outlined floating-heart" style="font-variation-settings: &quot;FILL&quot; 1; font-size: 45.518px; left: 40.0217vw; animation-duration: 17.1458s; animation-delay: -8.12835s;">favorite</span><span class="material-symbols-outlined floating-heart" style="font-variation-settings: &quot;FILL&quot; 1; font-size: 27.0015px; left: 1.59134vw; animation-duration: 18.0881s; animation-delay: -13.1835s;">favorite</span><span class="material-symbols-outlined floating-heart" style="font-variation-settings: &quot;FILL&quot; 1; font-size: 38.7137px; left: 71.2805vw; animation-duration: 18.2417s; animation-delay: -13.0008s;">favorite</span><span class="material-symbols-outlined floating-heart" style="font-variation-settings: &quot;FILL&quot; 1; font-size: 25.9549px; left: 64.5986vw; animation-duration: 22.3819s; animation-delay: -4.44225s;">favorite</span><span class="material-symbols-outlined floating-heart" style="font-variation-settings: &quot;FILL&quot; 1; font-size: 13.9418px; left: 7.60502vw; animation-duration: 18.604s; animation-delay: -7.61567s;">favorite</span><span class="material-symbols-outlined floating-heart" style="font-variation-settings: &quot;FILL&quot; 1; font-size: 27.3391px; left: 0.109913vw; animation-duration: 18.1134s; animation-delay: -14.963s;">favorite</span><span class="material-symbols-outlined floating-heart" style="font-variation-settings: &quot;FILL&quot; 1; font-size: 29.1204px; left: 85.1383vw; animation-duration: 18.287s; animation-delay: -5.0073s;">favorite</span><span class="material-symbols-outlined floating-heart" style="font-variation-settings: &quot;FILL&quot; 1; font-size: 27.7911px; left: 19.5998vw; animation-duration: 12.033s; animation-delay: -12.3381s;">favorite</span></div>
+<div class="absolute inset-0 z-0 pointer-events-none overflow-hidden" id="hearts-container"></div>
 <!-- MAIN CONTENT WRAPPER -->
 <div class="relative z-10 flex flex-col min-h-screen">
 <!-- TopAppBar (from JSON) -->
 <header class="flex justify-between items-center w-full px-gutter py-md max-w-container-max mx-auto bg-transparent top-0">
 <div class="flex items-center gap-xs">
 <span class="material-symbols-outlined text-[28px] text-love-red" data-icon="local_fire_department" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
-<h1 class="text-headline-lg-mobile font-headline-lg-mobile tracking-tighter uppercase text-surface-container-lowest">
-                    Premium FLAMES
-                </h1>
+<h1 class="text-headline-lg-mobile font-headline-lg-mobile tracking-tighter uppercase text-surface-container-lowest">Premium FLAMES - Authentic Audio</h1>
 </div>
 <div class="flex flex-col gap-2">
 <button class="glass-panel px-4 py-2 rounded-full text-label-md font-label-md flex items-center gap-2 hover:bg-glass-white/20 transition-all hover:scale-105 active:scale-95 shadow-sm shadow-shadow-tint">
@@ -232,8 +232,8 @@
                     Theme
                 </button>
 <button class="glass-panel px-4 py-2 rounded-full text-label-md font-label-md flex items-center gap-2 hover:bg-glass-white/20 transition-all hover:scale-105 active:scale-95 shadow-sm shadow-shadow-tint" onclick="cycleMusic()">
-<span class="material-symbols-outlined text-[18px] text-blue-200" data-icon="music_note">music_note</span>
-<span id="music-btn-label" class="">Music: Off</span>
+<span class="material-symbols-outlined text-[18px] text-blue-200" data-icon="music_off" id="music-btn-icon">music_off</span>
+<span class="" id="music-btn-label">Music: Off</span>
 </button>
 </div>
 </header>
@@ -258,7 +258,7 @@
 <div class="w-full flex flex-col gap-6 mt-4">
 <div class="relative w-full">
 <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-glass-white/80" data-icon="person">person</span>
-<input autocomplete="off" class="input-glass w-full rounded-2xl py-4 pl-12 pr-4 text-center text-body-lg font-body-lg" id="name1" placeholder="Your Name" type="text">
+<input autocomplete="off" class="input-glass w-full rounded-2xl py-4 pl-12 pr-4 text-center text-body-lg font-body-lg" id="name1" placeholder="Your Name" type="text"/>
 </div>
 <div class="flex justify-center -my-2 z-10 relative">
 <div class="bg-primary-container rounded-full p-2 shadow-md">
@@ -267,7 +267,7 @@
 </div>
 <div class="relative w-full">
 <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-glass-white/80" data-icon="person_search">person_search</span>
-<input autocomplete="off" class="input-glass w-full rounded-2xl py-4 pl-12 pr-4 text-center text-body-lg font-body-lg" id="name2" placeholder="Their Name" type="text">
+<input autocomplete="off" class="input-glass w-full rounded-2xl py-4 pl-12 pr-4 text-center text-body-lg font-body-lg" id="name2" placeholder="Their Name" type="text"/>
 </div>
 </div>
 <div class="text-white text-sm h-4 opacity-0 transition-opacity" id="calc-error">Please enter both names</div>
@@ -303,7 +303,7 @@
 </main>
 <!-- Footer (from JSON) -->
 <footer class="w-full text-center py-lg mb-xl bg-transparent"><div class="flex flex-col items-center gap-4">
-<div class="w-20 h-20 rounded-full overflow-hidden shadow-lg shadow-shadow-tint border border-white/20 mx-auto mb-2"><img src="https://lh3.googleusercontent.com/aida/AP1WRLvcZxffBysJviPQta6qlozt9u-r7NT-sjC_IzTWjMIcedlm_3DwPOD3RK-nmV2_njCl_njVb4Ycxe-BeH79jC2WmdNXhceExebiAYQvwEkd4Tl_w8nVMCyRPLHuC7rxmfjZnFmawuhtA8vlelzgHkdpiHJdgUVxf8sUgGcpSV7xzu4Sj7BsS25GDHc2r6zRr4rCHUsG1PtuJaATc1NfZ4R897TD5Sm0Gr898AJvhGZZF8Grzjvrs-tIstYz" class="w-full h-full object-contain" alt="AK Logo"></div>
+<div class="w-20 h-20 rounded-full overflow-hidden shadow-lg shadow-shadow-tint border border-white/20 mx-auto mb-2"><img alt="AK Logo" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida/AP1WRLvcZxffBysJviPQta6qlozt9u-r7NT-sjC_IzTWjMIcedlm_3DwPOD3RK-nmV2_njCl_njVb4Ycxe-BeH79jC2WmdNXhceExebiAYQvwEkd4Tl_w8nVMCyRPLHuC7rxmfjZnFmawuhtA8vlelzgHkdpiHJdgUVxf8sUgGcpSV7xzu4Sj7BsS25GDHc2r6zRr4rCHUsG1PtuJaATc1NfZ4R897TD5Sm0Gr898AJvhGZZF8Grzjvrs-tIstYz"/></div>
 <p class="text-label-md font-label-md text-surface-container-lowest/70 font-headline-lg">
         Made with <span class="text-love-red">❤️</span> by <span class="text-surface-container-lowest font-bold">AK AKASH</span>
 </p>
@@ -311,7 +311,7 @@
 </div>
 <!-- Audio Elements -->
 <audio id="audio-player" loop=""></audio>
-<div id="toast" class="">Playing: Love Story</div>
+<div class="" id="toast"></div>
 <!-- Application Logic -->
 <script>
         // WebGL Shader Background Logic
@@ -463,13 +463,14 @@ void main() {
 
         // Music Player Logic
         const tracks = [
-            { name: "Love Story", src: "#" }, // Placeholder for Love Story
-            { name: "Golden Brown", src: "#" }, // Placeholder for Golden Brown
-            { name: "Love Story x Golden Brown", src: "#" } // Placeholder for mashup
+            { name: "Love Story", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" }, 
+            { name: "Golden Brown", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" }, 
+            { name: "Love Story x Golden Brown", src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" }
         ];
         window.currentTrackIndex = -1;
         const audioPlayer = document.getElementById('audio-player');
         const musicBtnLabel = document.getElementById('music-btn-label');
+        const musicBtnIcon = document.getElementById('music-btn-icon');
         const toast = document.getElementById('toast');
 
         function showToast(message) {
@@ -479,15 +480,24 @@ void main() {
         }
 
         function cycleMusic() {
-            window.currentTrackIndex = (window.currentTrackIndex + 1) % tracks.length;
-            const track = tracks[window.currentTrackIndex];
+            window.currentTrackIndex++;
             
-            audioPlayer.src = track.src;
-            // Uncomment the line below when real audio sources are provided
-            // audioPlayer.play().catch(e => console.log("Audio playback failed:", e));
-            
-            musicBtnLabel.innerText = "Music: On";
-            showToast("Playing: " + track.name);
+            if (window.currentTrackIndex >= tracks.length) {
+                window.currentTrackIndex = -1;
+                audioPlayer.pause();
+                audioPlayer.currentTime = 0;
+                musicBtnLabel.innerText = "Music: Off";
+                musicBtnIcon.innerText = "music_off";
+                showToast("Music Off");
+            } else {
+                const track = tracks[window.currentTrackIndex];
+                audioPlayer.src = track.src;
+                audioPlayer.play().catch(e => console.log("Audio playback failed:", e));
+                
+                musicBtnLabel.innerText = "Music: On";
+                musicBtnIcon.innerText = "music_note";
+                showToast("Playing: " + track.name);
+            }
         }
 
         // FLAMES Calculator Logic
@@ -574,6 +584,4 @@ void main() {
         // Initialize
         document.addEventListener('DOMContentLoaded', createHearts);
     </script>
-
-
 </body></html>
