@@ -1,0 +1,579 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Premium FLAMES Calculator</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&amp;family=Plus+Jakarta+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- html2canvas -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<!-- Tailwind Config from Guidelines -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "shadow-tint": "rgba(255, 65, 108, 0.15)",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-highest": "#e2e2e2",
+                    "surface-container": "#eeeeee",
+                    "surface-bright": "#f9f9f9",
+                    "outline": "#8f6f72",
+                    "surface-tint": "#bd0042",
+                    "primary-fixed-dim": "#ffb2ba",
+                    "tertiary-container": "#d43d2d",
+                    "on-background": "#1a1c1c",
+                    "error": "#ba1a1a",
+                    "on-tertiary-fixed-variant": "#920703",
+                    "surface": "#f9f9f9",
+                    "love-red": "#FF4B2B",
+                    "secondary-container": "#fdbec9",
+                    "primary-fixed": "#ffd9dc",
+                    "outline-variant": "#e3bdc0",
+                    "on-surface-variant": "#5b4042",
+                    "surface-container-low": "#f3f3f4",
+                    "on-secondary": "#ffffff",
+                    "primary-container": "#de2656",
+                    "on-error": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "glass-white": "rgba(255, 255, 255, 0.7)",
+                    "primary": "#b90040",
+                    "surface-variant": "#e2e2e2",
+                    "on-primary-container": "#fffbff",
+                    "soft-blush": "#FFF0F3",
+                    "secondary-fixed-dim": "#f4b6c1",
+                    "on-tertiary-fixed": "#410000",
+                    "tertiary-fixed": "#ffdad4",
+                    "tertiary": "#b12417",
+                    "secondary": "#81515a",
+                    "inverse-primary": "#ffb2ba",
+                    "surface-container-high": "#e8e8e8",
+                    "on-tertiary-container": "#fffbff",
+                    "background": "#f9f9f9",
+                    "on-primary-fixed": "#400011",
+                    "tertiary-fixed-dim": "#ffb4a8",
+                    "on-secondary-fixed-variant": "#663a43",
+                    "on-primary-fixed-variant": "#910031",
+                    "secondary-fixed": "#ffd9df",
+                    "surface-dim": "#dadada",
+                    "on-surface": "#1a1c1c",
+                    "inverse-surface": "#2f3131",
+                    "on-secondary-container": "#7a4a54",
+                    "on-secondary-fixed": "#330f19",
+                    "on-error-container": "#93000a",
+                    "on-primary": "#ffffff",
+                    "inverse-on-surface": "#f0f1f1",
+                    "on-tertiary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px",
+                    "2xl": "1.5rem",
+                    "3xl": "2rem"
+            },
+            "spacing": {
+                    "lg": "48px",
+                    "gutter": "20px",
+                    "xs": "4px",
+                    "container-max": "450px",
+                    "md": "24px",
+                    "sm": "12px",
+                    "base": "8px",
+                    "xl": "80px"
+            },
+            "fontFamily": {
+                    "label-md": ["Plus Jakarta Sans"],
+                    "headline-lg-mobile": ["Playfair Display"],
+                    "body-md": ["Plus Jakarta Sans"],
+                    "body-lg": ["Plus Jakarta Sans"],
+                    "display-lg": ["Playfair Display"],
+                    "headline-lg": ["Playfair Display"],
+                    "button-text": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "label-md": ["14px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                    "headline-lg-mobile": ["28px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                    "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                    "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                    "display-lg": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                    "headline-lg": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                    "button-text": ["16px", { "lineHeight": "1", "fontWeight": "700" }]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        /* Custom Utilities */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Floating Hearts Animation */
+        .floating-heart {
+            position: absolute;
+            color: rgba(255, 75, 43, 0.6);
+            animation: floatUp linear infinite;
+            bottom: -50px;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(0.8) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-100vh) scale(1.2) rotate(45deg); opacity: 0; }
+        }
+
+        .view-section {
+            display: none;
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+        .view-section.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .input-glass {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .input-glass:focus {
+            outline: none;
+            border-bottom: 2px solid #ffffff;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .input-glass::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Toast Animation */
+        #toast {
+            visibility: hidden;
+            min-width: 250px;
+            margin-left: -125px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            text-align: center;
+            border-radius: 8px;
+            padding: 16px;
+            position: fixed;
+            z-index: 50;
+            left: 50%;
+            bottom: 30px;
+            font-size: 14px;
+            backdrop-filter: blur(5px);
+        }
+
+        #toast.show {
+            visibility: visible;
+            -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+
+        @-webkit-keyframes fadein {
+            from {bottom: 0; opacity: 0;} 
+            to {bottom: 30px; opacity: 1;}
+        }
+
+        @keyframes fadein {
+            from {bottom: 0; opacity: 0;}
+            to {bottom: 30px; opacity: 1;}
+        }
+
+        @-webkit-keyframes fadeout {
+            from {bottom: 30px; opacity: 1;} 
+            to {bottom: 0; opacity: 0;}
+        }
+
+        @keyframes fadeout {
+            from {bottom: 30px; opacity: 1;}
+            to {bottom: 0; opacity: 0;}
+        }
+    </style>
+</head>
+<body class="bg-transparent min-h-screen flex flex-col relative overflow-hidden text-surface-container-lowest font-body-md">
+<!-- Background WebGL Shader Canvas -->
+<canvas class="fixed inset-0 w-full h-full z-[-2] pointer-events-none" id="bg-canvas" width="390" height="906"></canvas>
+<!-- Background Floating Hearts Container -->
+<div class="absolute inset-0 z-0 pointer-events-none overflow-hidden" id="hearts-container"><span class="material-symbols-outlined floating-heart" style="font-variation-settings: &quot;FILL&quot; 1; font-size: 27.6063px; left: 97.3242vw; animation-duration: 23.9953s; animation-delay: -13.4282s;">favorite</span><span class="material-symbols-outlined floating-heart" style="font-variation-settings: &quot;FILL&quot; 1; font-size: 40.4605px; left: 29.1977vw; animation-duration: 24.3513s; animation-delay: -16.6819s;">favorite</span><span class="material-symbols-outlined floating-heart" style="font-variation-settings: &quot;FILL&quot; 1; font-size: 20.4926px; left: 46.9281vw; animation-duration: 24.2988s; animation-delay: -1.55015s;">favorite</span><span class="material-symbols-outlined floating-heart" style="font-variation-settings: &quot;FILL&quot; 1; font-size: 28.6576px; left: 95.8929vw; animation-duration: 12.7945s; animation-delay: -8.84751s;">favorite</span><span class="material-symbols-outlined floating-heart" style="font-variation-settings: &quot;FILL&quot; 1; font-size: 23.2879px; left: 88.6268vw; animation-duration: 12.6624s; animation-delay: -16.9326s;">favorite</span><span class="material-symbols-outlined floating-heart" style="font-variation-settings: &quot;FILL&quot; 1; font-size: 22.1102px; left: 45.3049vw; animation-duration: 11.1348s; animation-delay: -6.10169s;">favorite</span><span class="material-symbols-outlined floating-heart" style="font-variation-settings: &quot;FILL&quot; 1; font-size: 38.6098px; left: 9.35729vw; animation-duration: 11.733s; animation-delay: -16.2692s;">favorite</span><span class="material-symbols-outlined floating-heart" style="font-variation-settings: &quot;FILL&quot; 1; font-size: 25.6624px; left: 10.184vw; animation-duration: 10.2739s; animation-delay: -14.1857s;">favorite</span><span class="material-symbols-outlined floating-heart" style="font-variation-settings: &quot;FILL&quot; 1; font-size: 37.2532px; left: 63.2101vw; animation-duration: 23.1716s; animation-delay: -11.7142s;">favorite</span><span class="material-symbols-outlined floating-heart" style="font-variation-settings: &quot;FILL&quot; 1; font-size: 26.1838px; left: 64.505vw; animation-duration: 10.7601s; animation-delay: -2.64205s;">favorite</span><span class="material-symbols-outlined floating-heart" style="font-variation-settings: &quot;FILL&quot; 1; font-size: 49.1573px; left: 99.3964vw; animation-duration: 24.1717s; animation-delay: -6.71131s;">favorite</span><span class="material-symbols-outlined floating-heart" style="font-variation-settings: &quot;FILL&quot; 1; font-size: 44.6208px; left: 16.2646vw; animation-duration: 20.9516s; animation-delay: -5.51816s;">favorite</span><span class="material-symbols-outlined floating-heart" style="font-variation-settings: &quot;FILL&quot; 1; font-size: 45.518px; left: 40.0217vw; animation-duration: 17.1458s; animation-delay: -8.12835s;">favorite</span><span class="material-symbols-outlined floating-heart" style="font-variation-settings: &quot;FILL&quot; 1; font-size: 27.0015px; left: 1.59134vw; animation-duration: 18.0881s; animation-delay: -13.1835s;">favorite</span><span class="material-symbols-outlined floating-heart" style="font-variation-settings: &quot;FILL&quot; 1; font-size: 38.7137px; left: 71.2805vw; animation-duration: 18.2417s; animation-delay: -13.0008s;">favorite</span><span class="material-symbols-outlined floating-heart" style="font-variation-settings: &quot;FILL&quot; 1; font-size: 25.9549px; left: 64.5986vw; animation-duration: 22.3819s; animation-delay: -4.44225s;">favorite</span><span class="material-symbols-outlined floating-heart" style="font-variation-settings: &quot;FILL&quot; 1; font-size: 13.9418px; left: 7.60502vw; animation-duration: 18.604s; animation-delay: -7.61567s;">favorite</span><span class="material-symbols-outlined floating-heart" style="font-variation-settings: &quot;FILL&quot; 1; font-size: 27.3391px; left: 0.109913vw; animation-duration: 18.1134s; animation-delay: -14.963s;">favorite</span><span class="material-symbols-outlined floating-heart" style="font-variation-settings: &quot;FILL&quot; 1; font-size: 29.1204px; left: 85.1383vw; animation-duration: 18.287s; animation-delay: -5.0073s;">favorite</span><span class="material-symbols-outlined floating-heart" style="font-variation-settings: &quot;FILL&quot; 1; font-size: 27.7911px; left: 19.5998vw; animation-duration: 12.033s; animation-delay: -12.3381s;">favorite</span></div>
+<!-- MAIN CONTENT WRAPPER -->
+<div class="relative z-10 flex flex-col min-h-screen">
+<!-- TopAppBar (from JSON) -->
+<header class="flex justify-between items-center w-full px-gutter py-md max-w-container-max mx-auto bg-transparent top-0">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[28px] text-love-red" data-icon="local_fire_department" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+<h1 class="text-headline-lg-mobile font-headline-lg-mobile tracking-tighter uppercase text-surface-container-lowest">
+                    Premium FLAMES
+                </h1>
+</div>
+<div class="flex flex-col gap-2">
+<button class="glass-panel px-4 py-2 rounded-full text-label-md font-label-md flex items-center gap-2 hover:bg-glass-white/20 transition-all hover:scale-105 active:scale-95 shadow-sm shadow-shadow-tint">
+<span class="material-symbols-outlined text-[18px] text-yellow-300" data-icon="dark_mode" style="font-variation-settings: 'FILL' 1;">dark_mode</span>
+                    Theme
+                </button>
+<button class="glass-panel px-4 py-2 rounded-full text-label-md font-label-md flex items-center gap-2 hover:bg-glass-white/20 transition-all hover:scale-105 active:scale-95 shadow-sm shadow-shadow-tint" onclick="cycleMusic()">
+<span class="material-symbols-outlined text-[18px] text-blue-200" data-icon="music_note">music_note</span>
+<span id="music-btn-label" class="">Music: Off</span>
+</button>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-grow flex items-center justify-center p-gutter w-full max-w-container-max mx-auto">
+<!-- Central Glass Card -->
+<div class="glass-panel rounded-[32px] w-full p-8 shadow-2xl shadow-shadow-tint text-center relative overflow-hidden" id="flames-card">
+<!-- HERO VIEW -->
+<section class="view-section active flex-col items-center gap-6" id="view-hero">
+<span class="material-symbols-outlined text-[80px] text-love-red drop-shadow-[0_0_15px_rgba(255,75,43,0.5)]" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span>
+<h2 class="text-display-lg font-display-lg text-surface-container-lowest tracking-tight">FLAMES</h2>
+<p class="text-body-lg font-body-lg text-surface-container-lowest/90 mb-4 px-4">
+                        Discover your relationship destiny with a stylish animated FLAMES experience.
+                    </p>
+<button class="bg-love-red text-on-primary text-button-text font-button-text px-8 py-4 rounded-full shadow-lg shadow-shadow-tint hover:scale-105 active:scale-95 transition-all duration-200 w-full max-w-[250px]" onclick="switchView('view-calc')">
+                        Start Journey
+                    </button>
+</section>
+<!-- CALCULATOR VIEW -->
+<section class="view-section flex-col items-center gap-6 w-full" id="view-calc">
+<h2 class="text-headline-lg-mobile font-headline-lg-mobile mb-2">Calculator</h2>
+<div class="w-full flex flex-col gap-6 mt-4">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-glass-white/80" data-icon="person">person</span>
+<input autocomplete="off" class="input-glass w-full rounded-2xl py-4 pl-12 pr-4 text-center text-body-lg font-body-lg" id="name1" placeholder="Your Name" type="text">
+</div>
+<div class="flex justify-center -my-2 z-10 relative">
+<div class="bg-primary-container rounded-full p-2 shadow-md">
+<span class="material-symbols-outlined text-[20px] text-on-primary" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</div>
+</div>
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-glass-white/80" data-icon="person_search">person_search</span>
+<input autocomplete="off" class="input-glass w-full rounded-2xl py-4 pl-12 pr-4 text-center text-body-lg font-body-lg" id="name2" placeholder="Their Name" type="text">
+</div>
+</div>
+<div class="text-white text-sm h-4 opacity-0 transition-opacity" id="calc-error">Please enter both names</div>
+<button class="bg-love-red text-on-primary text-button-text font-button-text px-8 py-4 rounded-full shadow-lg shadow-shadow-tint hover:scale-105 active:scale-95 transition-all duration-200 w-full mt-4" onclick="calculateFlames()">
+                        Calculate
+                    </button>
+</section>
+<!-- RESULT VIEW -->
+<section class="view-section flex-col items-center gap-6 w-full" id="view-result">
+<h3 class="text-label-md font-label-md tracking-[0.2em] uppercase text-surface-container-lowest/80">The Stars Say...</h3>
+<div class="relative w-32 h-32 flex items-center justify-center my-4">
+<div class="absolute inset-0 bg-primary-container/40 rounded-full animate-ping"></div>
+<div class="absolute inset-0 glass-panel rounded-full flex items-center justify-center z-10 shadow-[0_0_30px_rgba(255,75,43,0.4)]">
+<span class="material-symbols-outlined text-[64px] text-love-red" data-icon="favorite" id="result-icon" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</div>
+</div>
+<h2 class="text-display-lg font-display-lg text-surface-container-lowest" id="result-title">Lovers</h2>
+<p class="text-body-lg font-body-lg text-surface-container-lowest/90 px-4" id="result-desc">
+                        A beautiful romance is written in your destiny.
+                    </p>
+<div class="w-full flex flex-col gap-4 mt-6">
+<button class="glass-panel text-surface-container-lowest text-button-text font-button-text px-8 py-4 rounded-full hover:scale-105 active:scale-95 transition-all duration-200 w-full flex justify-center items-center gap-2" onclick="downloadResultImage()">
+<span class="material-symbols-outlined" data-icon="download">download</span>
+                            Download as Image
+                        </button>
+<button class="glass-panel text-surface-container-lowest text-button-text font-button-text px-8 py-4 rounded-full hover:scale-105 active:scale-95 transition-all duration-200 w-full flex justify-center items-center gap-2" onclick="switchView('view-calc'); document.getElementById('name1').value=''; document.getElementById('name2').value='';">
+<span class="material-symbols-outlined" data-icon="refresh">refresh</span>
+                            Try Again
+                        </button>
+<button class="glass-panel text-surface-container-lowest text-button-text font-button-text px-8 py-4 rounded-full hover:scale-105 active:scale-95 transition-all duration-200 w-full flex justify-center items-center gap-2" onclick="navigator.clipboard.writeText(window.location.href); alert('Link copied! Share it on your Instagram story or bio.');"><span class="material-symbols-outlined" data-icon="photo_camera">photo_camera</span>Share on Instagram</button></div>
+</section>
+</div>
+</main>
+<!-- Footer (from JSON) -->
+<footer class="w-full text-center py-lg mb-xl bg-transparent"><div class="flex flex-col items-center gap-4">
+<div class="w-20 h-20 rounded-full overflow-hidden shadow-lg shadow-shadow-tint border border-white/20 mx-auto mb-2"><img src="https://lh3.googleusercontent.com/aida/AP1WRLvcZxffBysJviPQta6qlozt9u-r7NT-sjC_IzTWjMIcedlm_3DwPOD3RK-nmV2_njCl_njVb4Ycxe-BeH79jC2WmdNXhceExebiAYQvwEkd4Tl_w8nVMCyRPLHuC7rxmfjZnFmawuhtA8vlelzgHkdpiHJdgUVxf8sUgGcpSV7xzu4Sj7BsS25GDHc2r6zRr4rCHUsG1PtuJaATc1NfZ4R897TD5Sm0Gr898AJvhGZZF8Grzjvrs-tIstYz" class="w-full h-full object-contain" alt="AK Logo"></div>
+<p class="text-label-md font-label-md text-surface-container-lowest/70 font-headline-lg">
+        Made with <span class="text-love-red">❤️</span> by <span class="text-surface-container-lowest font-bold">AK AKASH</span>
+</p>
+</div></footer>
+</div>
+<!-- Audio Elements -->
+<audio id="audio-player" loop=""></audio>
+<div id="toast" class="">Playing: Love Story</div>
+<!-- Application Logic -->
+<script>
+        // WebGL Shader Background Logic
+        (function() {
+            const canvas = document.getElementById('bg-canvas');
+            const gl = canvas.getContext('webgl');
+            if (!gl) return;
+
+            const vsSource = `
+                attribute vec2 a_position;
+                varying vec2 v_texCoord;
+                void main() {
+                    gl_Position = vec4(a_position, 0.0, 1.0);
+                    v_texCoord = a_position * 0.5 + 0.5;
+                }
+            `;
+
+            let fsSource = `
+precision highp float;
+varying vec2 v_texCoord;
+uniform float u_time;
+uniform vec2 u_resolution;
+uniform vec2 u_mouse;
+uniform float u_track;
+
+// Simulates audio frequency data
+float getFrequency(float f) {
+    f *= (1.0 + u_track * 0.4);
+    return sin(u_time * 2.0 + f * 10.0) * 0.5 + 0.5;
+}
+
+void main() {
+    vec2 uv = v_texCoord;
+    vec2 p = (uv - 0.5) * 2.0;
+    p.x *= u_resolution.x / u_resolution.y;
+
+    float dist = length(p);
+    float angle = atan(p.y, p.x);
+
+    // Love Red (#ff416c) stops
+    vec3 color1 = vec3(1.0, 0.25, 0.42); 
+    // Golden Brown (#996515) stops
+    vec3 color2 = vec3(0.6, 0.4, 0.08); 
+    
+    // Wave pattern for visualization
+    float wave = 0.0;
+    for(float i = 1.0; i < 4.0; i++) {
+        wave += sin(p.x * 3.0 * i + u_time * i) * 0.1 * getFrequency(i);
+        wave += cos(p.y * 2.5 * i - u_time * 0.5 * i) * 0.1 * getFrequency(i * 1.3);
+    }
+
+    float mask = smoothstep(0.4, 0.5, dist + wave);
+    vec3 finalColor = mix(color1, color2, 0.5 + 0.5 * sin(u_time * 0.5 + dist * 2.0 + u_track));
+    
+    // Add audio-reactive "pulse"
+    float pulse = getFrequency(1.0) * 0.05;
+    finalColor += vec3(0.1, 0.05, 0.0) * (1.0 - smoothstep(0.4 + pulse, 0.42 + pulse, dist));
+
+    gl_FragColor = vec4(finalColor * (1.0 - mask * 0.8), 1.0);
+}
+            `;
+
+            function createShader(gl, type, source) {
+                const shader = gl.createShader(type);
+                gl.shaderSource(shader, source);
+                gl.compileShader(shader);
+                if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+                    console.error(gl.getShaderInfoLog(shader));
+                    gl.deleteShader(shader);
+                    return null;
+                }
+                return shader;
+            }
+
+            const vertexShader = createShader(gl, gl.VERTEX_SHADER, vsSource);
+            const fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fsSource);
+
+            const program = gl.createProgram();
+            gl.attachShader(program, vertexShader);
+            gl.attachShader(program, fragmentShader);
+            gl.linkProgram(program);
+            gl.useProgram(program);
+
+            const positionBuffer = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
+                -1, -1,  1, -1,  -1, 1,
+                -1,  1,  1, -1,   1, 1
+            ]), gl.STATIC_DRAW);
+
+            const positionLocation = gl.getAttribLocation(program, "a_position");
+            gl.enableVertexAttribArray(positionLocation);
+            gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
+
+            const timeLocation = gl.getUniformLocation(program, "u_time");
+            const resolutionLocation = gl.getUniformLocation(program, "u_resolution");
+            const trackLocation = gl.getUniformLocation(program, "u_track");
+
+            function render(time) {
+                if (canvas.width !== canvas.clientWidth || canvas.height !== canvas.clientHeight) {
+                    canvas.width = canvas.clientWidth;
+                    canvas.height = canvas.clientHeight;
+                    gl.viewport(0, 0, canvas.width, canvas.height);
+                }
+
+                gl.uniform1f(timeLocation, time * 0.001);
+                gl.uniform2f(resolutionLocation, canvas.width, canvas.height);
+                gl.uniform1f(trackLocation, window.currentTrackIndex || 0);
+
+                gl.drawArrays(gl.TRIANGLES, 0, 6);
+                requestAnimationFrame(render);
+            }
+            requestAnimationFrame(render);
+        })();
+
+        // Floating Hearts Background Generation
+        function createHearts() {
+            const container = document.getElementById('hearts-container');
+            const heartCount = 20;
+
+            for (let i = 0; i < heartCount; i++) {
+                const heart = document.createElement('span');
+                heart.className = 'material-symbols-outlined floating-heart';
+                heart.innerHTML = 'favorite';
+                heart.style.fontVariationSettings = "'FILL' 1";
+                
+                // Random properties
+                const size = Math.random() * 40 + 10; // 10px to 50px
+                const left = Math.random() * 100; // 0% to 100%
+                const duration = Math.random() * 15 + 10; // 10s to 25s
+                const delay = Math.random() * 20; // 0s to 20s
+                
+                heart.style.fontSize = `${size}px`;
+                heart.style.left = `${left}vw`;
+                heart.style.animationDuration = `${duration}s`;
+                heart.style.animationDelay = `-${delay}s`; // start midway
+
+                container.appendChild(heart);
+            }
+        }
+
+        // View Switching Logic
+        function switchView(viewId) {
+            document.querySelectorAll('.view-section').forEach(el => {
+                el.classList.remove('active');
+            });
+            document.getElementById(viewId).classList.add('active');
+        }
+
+        // Music Player Logic
+        const tracks = [
+            { name: "Love Story", src: "#" }, // Placeholder for Love Story
+            { name: "Golden Brown", src: "#" }, // Placeholder for Golden Brown
+            { name: "Love Story x Golden Brown", src: "#" } // Placeholder for mashup
+        ];
+        window.currentTrackIndex = -1;
+        const audioPlayer = document.getElementById('audio-player');
+        const musicBtnLabel = document.getElementById('music-btn-label');
+        const toast = document.getElementById('toast');
+
+        function showToast(message) {
+            toast.innerText = message;
+            toast.className = "show font-label-md";
+            setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
+        }
+
+        function cycleMusic() {
+            window.currentTrackIndex = (window.currentTrackIndex + 1) % tracks.length;
+            const track = tracks[window.currentTrackIndex];
+            
+            audioPlayer.src = track.src;
+            // Uncomment the line below when real audio sources are provided
+            // audioPlayer.play().catch(e => console.log("Audio playback failed:", e));
+            
+            musicBtnLabel.innerText = "Music: On";
+            showToast("Playing: " + track.name);
+        }
+
+        // FLAMES Calculator Logic
+        const flamesData = {
+            'F': { title: 'Friends', icon: 'sentiment_satisfied', desc: 'A strong and beautiful friendship binds you together.', color: 'text-blue-300' },
+            'L': { title: 'Lovers', icon: 'favorite', desc: 'A passionate romance is written in your destiny.', color: 'text-love-red' },
+            'A': { title: 'Affection', icon: 'volunteer_activism', desc: 'There is a deep mutual fondness and care between you.', color: 'text-pink-300' },
+            'M': { title: 'Marriage', icon: 'rings', desc: 'Wedding bells are ringing! A lifelong partnership awaits.', color: 'text-yellow-300' },
+            'E': { title: 'Enemies', icon: 'swords', desc: 'A fiery dynamic filled with rivalry. Proceed with caution!', color: 'text-red-900' }, // fallback icon swords -> 'gavel' or 'block' if not available in MS
+            'S': { title: 'Siblings', icon: 'family_restroom', desc: 'A familial bond that feels like a protective sibling connection.', color: 'text-green-300' }
+        };
+
+        // Material Symbol fallbacks for specific names
+        const iconMapping = {
+            'swords': 'sports_martial_arts', // Close enough representation
+            'rings': 'diamond'
+        };
+
+        function calculateFlames() {
+            const name1 = document.getElementById('name1').value.trim().toLowerCase().replace(/[^a-z]/g, '');
+            const name2 = document.getElementById('name2').value.trim().toLowerCase().replace(/[^a-z]/g, '');
+            const errorMsg = document.getElementById('calc-error');
+
+            if (!name1 || !name2) {
+                errorMsg.style.opacity = '1';
+                setTimeout(() => errorMsg.style.opacity = '0', 3000);
+                return;
+            }
+
+            // Calculation
+            let n1Arr = name1.split('');
+            let n2Arr = name2.split('');
+
+            for (let i = 0; i < n1Arr.length; i++) {
+                const matchIndex = n2Arr.indexOf(n1Arr[i]);
+                if (matchIndex !== -1) {
+                    n1Arr[i] = '';
+                    n2Arr[matchIndex] = '';
+                }
+            }
+
+            const remainingCount = n1Arr.join('').length + n2Arr.join('').length;
+            const flamesStr = "FLAMES";
+            let resultChar = 'F';
+
+            if (remainingCount > 0) {
+                let fArr = flamesStr.split('');
+                let idx = 0;
+                while (fArr.length > 1) {
+                    idx = (idx + remainingCount - 1) % fArr.length;
+                    fArr.splice(idx, 1);
+                }
+                resultChar = fArr[0];
+            }
+
+            // Render Result
+            const resultData = flamesData[resultChar];
+            const resultIconEl = document.getElementById('result-icon');
+            
+            resultIconEl.innerHTML = iconMapping[resultData.icon] || resultData.icon;
+            resultIconEl.setAttribute('data-icon', iconMapping[resultData.icon] || resultData.icon);
+            document.getElementById('result-title').innerText = resultData.title;
+            document.getElementById('result-desc').innerText = resultData.desc;
+
+            switchView('view-result');
+        }
+
+        // Image Download Logic
+        function downloadResultImage() {
+            const element = document.getElementById('flames-card');
+            if (element) {
+                html2canvas(element, {
+                    backgroundColor: null,
+                    scale: 2 // Higher resolution
+                }).then(canvas => {
+                    const link = document.createElement('a');
+                    link.download = 'flames-result.png';
+                    link.href = canvas.toDataURL('image/png');
+                    link.click();
+                });
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', createHearts);
+    </script>
+
+
+</body></html>
