@@ -71,7 +71,10 @@
                     "on-error-container": "#93000a",
                     "on-primary": "#ffffff",
                     "inverse-on-surface": "#f0f1f1",
-                    "on-tertiary": "#ffffff"
+                    "on-tertiary": "#ffffff",
+                    // Theme variables mapping
+                    "theme-text": "var(--text-main)",
+                    "theme-text-muted": "var(--text-muted)",
             },
             "borderRadius": {
                     "DEFAULT": "0.25rem",
@@ -114,12 +117,69 @@
       }
     </script>
 <style>
+        /* Theme Variables */
+        :root {
+            --text-main: #ffffff;
+            --text-muted: rgba(255, 255, 255, 0.9);
+            --glass-bg: rgba(255, 255, 255, 0.15);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --input-bg: rgba(255, 255, 255, 0.1);
+            --input-border: rgba(255, 255, 255, 0.3);
+            --input-focus-border: #ffffff;
+            --input-focus-bg: rgba(255, 255, 255, 0.2);
+            --input-placeholder: rgba(255, 255, 255, 0.7);
+            --btn-glass-hover: rgba(255, 255, 255, 0.2);
+            --icon-color: rgba(255, 255, 255, 0.8);
+        }
+
+        [data-theme="light"] {
+            --text-main: #1a1c1c;
+            --text-muted: rgba(26, 28, 28, 0.8);
+            --glass-bg: rgba(255, 255, 255, 0.6);
+            --glass-border: rgba(0, 0, 0, 0.1);
+            --input-bg: rgba(0, 0, 0, 0.05);
+            --input-border: rgba(0, 0, 0, 0.2);
+            --input-focus-border: #FF4B2B;
+            --input-focus-bg: rgba(0, 0, 0, 0.1);
+            --input-placeholder: rgba(0, 0, 0, 0.5);
+            --btn-glass-hover: rgba(0, 0, 0, 0.05);
+            --icon-color: rgba(0, 0, 0, 0.6);
+        }
+
+        [data-theme="red"] {
+            --text-main: #ffffff;
+            --text-muted: rgba(255, 255, 255, 0.9);
+            --glass-bg: rgba(255, 75, 43, 0.2);
+            --glass-border: rgba(255, 255, 255, 0.3);
+            --input-bg: rgba(255, 255, 255, 0.15);
+            --input-border: rgba(255, 255, 255, 0.4);
+            --input-focus-border: #ffffff;
+            --input-focus-bg: rgba(255, 255, 255, 0.25);
+            --input-placeholder: rgba(255, 255, 255, 0.8);
+            --btn-glass-hover: rgba(255, 255, 255, 0.3);
+            --icon-color: rgba(255, 255, 255, 0.9);
+        }
+
         /* Custom Utilities */
+        body {
+            color: var(--text-main);
+            transition: color 0.3s ease;
+        }
+
         .glass-panel {
-            background: rgba(255, 255, 255, 0.15);
+            background: var(--glass-bg);
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
+        }
+        
+        .glass-panel:hover {
+            background: var(--btn-glass-hover);
+        }
+
+        .glass-icon {
+            color: var(--icon-color);
         }
         
         /* Floating Hearts Animation */
@@ -151,20 +211,20 @@
         }
 
         .input-glass {
-            background: rgba(255, 255, 255, 0.1);
+            background: var(--input-bg);
             border: none;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
-            color: white;
+            border-bottom: 2px solid var(--input-border);
+            color: var(--text-main);
             transition: all 0.3s ease;
         }
         .input-glass:focus {
             outline: none;
-            border-bottom: 2px solid #ffffff;
+            border-bottom: 2px solid var(--input-focus-border);
             box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
-            background: rgba(255, 255, 255, 0.2);
+            background: var(--input-focus-bg);
         }
         .input-glass::placeholder {
-            color: rgba(255, 255, 255, 0.7);
+            color: var(--input-placeholder);
         }
 
         /* Toast Animation */
@@ -212,25 +272,25 @@
         }
     </style>
 </head>
-<body class="bg-transparent min-h-screen flex flex-col relative overflow-x-hidden text-surface-container-lowest font-body-md">
+<body class="bg-transparent min-h-screen flex flex-col relative overflow-x-hidden font-body-md" data-theme="dark">
 <!-- Background WebGL Shader Canvas -->
 <canvas class="fixed inset-0 w-full h-full z-[-2] pointer-events-none" height="906" id="bg-canvas" width="390"></canvas>
 <!-- Background Floating Hearts Container -->
 <div class="fixed inset-0 z-0 pointer-events-none overflow-hidden" id="hearts-container"></div>
 <!-- MAIN CONTENT WRAPPER -->
-<div class="relative z-10 flex flex-col min-h-screen">
+<div class="relative z-10 flex flex-col min-h-screen overflow-y-auto">
 <!-- TopAppBar (from JSON) -->
 <header class="flex justify-between items-center w-full px-gutter py-md max-w-container-max mx-auto bg-transparent top-0">
 <div class="flex items-center gap-xs">
 <span class="material-symbols-outlined text-[28px] text-love-red" data-icon="local_fire_department" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
-<h1 class="text-headline-lg-mobile font-headline-lg-mobile tracking-tighter uppercase text-surface-container-lowest">Premium FLAMES - Authentic Audio</h1>
+<h1 class="text-headline-lg-mobile font-headline-lg-mobile tracking-tighter uppercase text-theme-text">Premium FLAMES - Authentic Audio</h1>
 </div>
 <div class="flex flex-col gap-2">
-<button class="glass-panel px-4 py-2 rounded-full text-label-md font-label-md flex items-center gap-2 hover:bg-glass-white/20 transition-all hover:scale-105 active:scale-95 shadow-sm shadow-shadow-tint">
-<span class="material-symbols-outlined text-[18px] text-yellow-300" data-icon="dark_mode" style="font-variation-settings: 'FILL' 1;">dark_mode</span>
+<button class="glass-panel px-4 py-2 rounded-full text-label-md font-label-md flex items-center gap-2 transition-all hover:scale-105 active:scale-95 shadow-sm shadow-shadow-tint" onclick="cycleTheme()">
+<span class="material-symbols-outlined text-[18px] text-yellow-300" data-icon="palette" id="theme-btn-icon" style="font-variation-settings: 'FILL' 1;">dark_mode</span>
                     Theme
                 </button>
-<button class="glass-panel px-4 py-2 rounded-full text-label-md font-label-md flex items-center gap-2 hover:bg-glass-white/20 transition-all hover:scale-105 active:scale-95 shadow-sm shadow-shadow-tint" onclick="cycleMusic()">
+<button class="glass-panel px-4 py-2 rounded-full text-label-md font-label-md flex items-center gap-2 transition-all hover:scale-105 active:scale-95 shadow-sm shadow-shadow-tint" onclick="cycleMusic()">
 <span class="material-symbols-outlined text-[18px] text-blue-200" data-icon="music_off" id="music-btn-icon">music_off</span>
 <span class="" id="music-btn-label">Music: Off</span>
 </button>
@@ -243,8 +303,8 @@
 <!-- HERO VIEW -->
 <section class="view-section active flex-col items-center gap-6" id="view-hero">
 <span class="material-symbols-outlined text-[80px] text-love-red drop-shadow-[0_0_15px_rgba(255,75,43,0.5)]" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span>
-<h2 class="text-display-lg font-display-lg text-surface-container-lowest tracking-tight">FLAMES</h2>
-<p class="text-body-lg font-body-lg text-surface-container-lowest/90 mb-4 px-4">
+<h2 class="text-display-lg font-display-lg text-theme-text tracking-tight">FLAMES</h2>
+<p class="text-body-lg font-body-lg text-theme-text-muted mb-4 px-4">
                         Discover your relationship destiny with a stylish animated FLAMES experience.
                     </p>
 <button class="bg-love-red text-on-primary text-button-text font-button-text px-8 py-4 rounded-full shadow-lg shadow-shadow-tint hover:scale-105 active:scale-95 transition-all duration-200 w-full max-w-[250px]" onclick="switchView('view-calc')">
@@ -253,10 +313,10 @@
 </section>
 <!-- CALCULATOR VIEW -->
 <section class="view-section flex-col items-center gap-6 w-full" id="view-calc">
-<h2 class="text-headline-lg-mobile font-headline-lg-mobile mb-2">Calculator</h2>
+<h2 class="text-headline-lg-mobile font-headline-lg-mobile mb-2 text-theme-text">Calculator</h2>
 <div class="w-full flex flex-col gap-6 mt-4">
 <div class="relative w-full">
-<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-glass-white/80" data-icon="person">person</span>
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 glass-icon" data-icon="person">person</span>
 <input autocomplete="off" class="input-glass w-full rounded-2xl py-4 pl-12 pr-4 text-center text-body-lg font-body-lg" id="name1" placeholder="Your Name" type="text"/>
 </div>
 <div class="flex justify-center -my-2 z-10 relative">
@@ -265,46 +325,46 @@
 </div>
 </div>
 <div class="relative w-full">
-<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-glass-white/80" data-icon="person_search">person_search</span>
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 glass-icon" data-icon="person_search">person_search</span>
 <input autocomplete="off" class="input-glass w-full rounded-2xl py-4 pl-12 pr-4 text-center text-body-lg font-body-lg" id="name2" placeholder="Their Name" type="text"/>
 </div>
 </div>
-<div class="text-white text-sm h-4 opacity-0 transition-opacity" id="calc-error">Please enter both names</div>
+<div class="text-love-red text-sm h-4 opacity-0 transition-opacity font-bold" id="calc-error">Please enter both names</div>
 <button class="bg-love-red text-on-primary text-button-text font-button-text px-8 py-4 rounded-full shadow-lg shadow-shadow-tint hover:scale-105 active:scale-95 transition-all duration-200 w-full mt-4" onclick="calculateFlames()">
                         Calculate
                     </button>
 </section>
 <!-- RESULT VIEW -->
 <section class="view-section flex-col items-center gap-6 w-full" id="view-result">
-<h3 class="text-label-md font-label-md tracking-[0.2em] uppercase text-surface-container-lowest/80">The Stars Say...</h3>
+<h3 class="text-label-md font-label-md tracking-[0.2em] uppercase text-theme-text-muted">The Stars Say...</h3>
 <div class="relative w-32 h-32 flex items-center justify-center my-4">
 <div class="absolute inset-0 bg-primary-container/40 rounded-full animate-ping"></div>
 <div class="absolute inset-0 glass-panel rounded-full flex items-center justify-center z-10 shadow-[0_0_30px_rgba(255,75,43,0.4)]">
 <span class="material-symbols-outlined text-[64px] text-love-red" data-icon="favorite" id="result-icon" style="font-variation-settings: 'FILL' 1;">favorite</span>
 </div>
 </div>
-<h2 class="text-display-lg font-display-lg text-surface-container-lowest" id="result-title">Lovers</h2>
-<p class="text-body-lg font-body-lg text-surface-container-lowest/90 px-4" id="result-desc">
+<h2 class="text-display-lg font-display-lg text-theme-text" id="result-title">Lovers</h2>
+<p class="text-body-lg font-body-lg text-theme-text-muted px-4" id="result-desc">
                         A beautiful romance is written in your destiny.
                     </p>
 <div class="w-full flex flex-col gap-4 mt-6">
-<button class="glass-panel text-surface-container-lowest text-button-text font-button-text px-8 py-4 rounded-full hover:scale-105 active:scale-95 transition-all duration-200 w-full flex justify-center items-center gap-2" onclick="downloadResultImage()">
+<button class="glass-panel text-theme-text text-button-text font-button-text px-8 py-4 rounded-full hover:scale-105 active:scale-95 transition-all duration-200 w-full flex justify-center items-center gap-2" onclick="downloadResultImage()">
 <span class="material-symbols-outlined" data-icon="download">download</span>
                             Download as Image
                         </button>
-<button class="glass-panel text-surface-container-lowest text-button-text font-button-text px-8 py-4 rounded-full hover:scale-105 active:scale-95 transition-all duration-200 w-full flex justify-center items-center gap-2" onclick="switchView('view-calc'); document.getElementById('name1').value=''; document.getElementById('name2').value='';">
+<button class="glass-panel text-theme-text text-button-text font-button-text px-8 py-4 rounded-full hover:scale-105 active:scale-95 transition-all duration-200 w-full flex justify-center items-center gap-2" onclick="switchView('view-calc'); document.getElementById('name1').value=''; document.getElementById('name2').value='';">
 <span class="material-symbols-outlined" data-icon="refresh">refresh</span>
                             Try Again
                         </button>
-<button class="glass-panel text-surface-container-lowest text-button-text font-button-text px-8 py-4 rounded-full hover:scale-105 active:scale-95 transition-all duration-200 w-full flex justify-center items-center gap-2" onclick="navigator.clipboard.writeText(window.location.href); alert('Link copied! Share it on your Instagram story or bio.');"><span class="material-symbols-outlined" data-icon="photo_camera">photo_camera</span>Share on Instagram</button></div>
+<button class="glass-panel text-theme-text text-button-text font-button-text px-8 py-4 rounded-full hover:scale-105 active:scale-95 transition-all duration-200 w-full flex justify-center items-center gap-2" onclick="navigator.clipboard.writeText(window.location.href); alert('Link copied! Share it on your Instagram story or bio.');"><span class="material-symbols-outlined" data-icon="photo_camera">photo_camera</span>Share on Instagram</button></div>
 </section>
 </div>
 </main>
 <!-- Footer (from JSON) -->
 <footer class="w-full text-center py-lg mb-4 bg-transparent mt-auto"><div class="flex flex-col items-center gap-4">
 <div class="w-20 h-20 rounded-full overflow-hidden shadow-lg shadow-shadow-tint border border-white/20 mx-auto mb-2"><img alt="AK Logo" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida/AP1WRLvcZxffBysJviPQta6qlozt9u-r7NT-sjC_IzTWjMIcedlm_3DwPOD3RK-nmV2_njCl_njVb4Ycxe-BeH79jC2WmdNXhceExebiAYQvwEkd4Tl_w8nVMCyRPLHuC7rxmfjZnFmawuhtA8vlelzgHkdpiHJdgUVxf8sUgGcpSV7xzu4Sj7BsS25GDHc2r6zRr4rCHUsG1PtuJaATc1NfZ4R897TD5Sm0Gr898AJvhGZZF8Grzjvrs-tIstYz"/></div>
-<p class="text-label-md font-label-md text-surface-container-lowest/70 font-headline-lg">
-        Made with <span class="text-love-red">❤️</span> by <span class="text-surface-container-lowest font-bold">AK AKASH</span>
+<p class="text-label-md font-label-md text-theme-text-muted font-headline-lg">
+        Made with <span class="text-love-red">❤️</span> by <span class="text-theme-text font-bold">AK AKASH</span>
 </p>
 </div></footer>
 </div>
@@ -313,6 +373,21 @@
 <div class="" id="toast"></div>
 <!-- Application Logic -->
 <script>
+        // Theme Cycle Logic
+        const themes = ['dark', 'light', 'red'];
+        const themeIcons = ['dark_mode', 'light_mode', 'local_fire_department'];
+        let currentThemeIdx = 0;
+
+        function cycleTheme() {
+            currentThemeIdx = (currentThemeIdx + 1) % themes.length;
+            const newTheme = themes[currentThemeIdx];
+            document.body.setAttribute('data-theme', newTheme);
+            document.getElementById('theme-btn-icon').innerText = themeIcons[currentThemeIdx];
+            window.currentVisualTheme = currentThemeIdx;
+            showToast(`Theme: ${newTheme.charAt(0).toUpperCase() + newTheme.slice(1)}`);
+        }
+        window.currentVisualTheme = 0; // 0=dark, 1=light, 2=red
+
         // WebGL Shader Background Logic
         (function() {
             const canvas = document.getElementById('bg-canvas');
@@ -333,8 +408,8 @@ precision highp float;
 varying vec2 v_texCoord;
 uniform float u_time;
 uniform vec2 u_resolution;
-uniform vec2 u_mouse;
 uniform float u_track;
+uniform float u_theme;
 
 // Simulates audio frequency data
 float getFrequency(float f) {
@@ -350,10 +425,26 @@ void main() {
     float dist = length(p);
     float angle = atan(p.y, p.x);
 
-    // Love Red (#ff416c) stops
-    vec3 color1 = vec3(1.0, 0.25, 0.42); 
-    // Golden Brown (#996515) stops
-    vec3 color2 = vec3(0.6, 0.4, 0.08); 
+    vec3 color1;
+    vec3 color2;
+    vec3 baseBg;
+
+    if (u_theme < 0.5) {
+        // Dark Theme
+        color1 = vec3(1.0, 0.25, 0.42); // Love Red
+        color2 = vec3(0.6, 0.4, 0.08); // Golden Brown
+        baseBg = vec3(0.08, 0.05, 0.05);
+    } else if (u_theme < 1.5) {
+        // Light Theme
+        color1 = vec3(1.0, 0.6, 0.7); // Light Pink
+        color2 = vec3(0.9, 0.9, 0.9); // Off White
+        baseBg = vec3(0.98, 0.95, 0.95);
+    } else {
+        // Red Theme
+        color1 = vec3(1.0, 0.1, 0.2); // Bright Red
+        color2 = vec3(0.7, 0.0, 0.1); // Deep Red
+        baseBg = vec3(0.4, 0.05, 0.1);
+    }
     
     // Wave pattern for visualization
     float wave = 0.0;
@@ -367,9 +458,13 @@ void main() {
     
     // Add audio-reactive "pulse"
     float pulse = getFrequency(1.0) * 0.05;
-    finalColor += vec3(0.1, 0.05, 0.0) * (1.0 - smoothstep(0.4 + pulse, 0.42 + pulse, dist));
+    vec3 pulseColor = (u_theme < 0.5) ? vec3(0.1, 0.05, 0.0) : vec3(0.05, 0.0, 0.02);
+    finalColor += pulseColor * (1.0 - smoothstep(0.4 + pulse, 0.42 + pulse, dist));
 
-    gl_FragColor = vec4(finalColor * (1.0 - mask * 0.8), 1.0);
+    // Blend with base background
+    vec3 outputColor = mix(finalColor, baseBg, mask * 0.9);
+
+    gl_FragColor = vec4(outputColor, 1.0);
 }
             `;
 
@@ -408,6 +503,7 @@ void main() {
             const timeLocation = gl.getUniformLocation(program, "u_time");
             const resolutionLocation = gl.getUniformLocation(program, "u_resolution");
             const trackLocation = gl.getUniformLocation(program, "u_track");
+            const themeLocation = gl.getUniformLocation(program, "u_theme");
 
             function render(time) {
                 if (canvas.width !== canvas.clientWidth || canvas.height !== canvas.clientHeight) {
@@ -419,6 +515,7 @@ void main() {
                 gl.uniform1f(timeLocation, time * 0.001);
                 gl.uniform2f(resolutionLocation, canvas.width, canvas.height);
                 gl.uniform1f(trackLocation, window.currentTrackIndex || 0);
+                gl.uniform1f(themeLocation, window.currentVisualTheme || 0);
 
                 gl.drawArrays(gl.TRIANGLES, 0, 6);
                 requestAnimationFrame(render);
@@ -461,7 +558,7 @@ void main() {
         }
 
         // Music Player Logic
-        const tracks = [
+       const tracks = [
     { 
         name: "Love Story", 
         src: "audio/love_story.mp3" 
@@ -547,13 +644,13 @@ void main() {
             'L': { title: 'Lovers', icon: 'favorite', desc: 'A passionate romance is written in your destiny.', color: 'text-love-red' },
             'A': { title: 'Affection', icon: 'volunteer_activism', desc: 'There is a deep mutual fondness and care between you.', color: 'text-pink-300' },
             'M': { title: 'Marriage', icon: 'rings', desc: 'Wedding bells are ringing! A lifelong partnership awaits.', color: 'text-yellow-300' },
-            'E': { title: 'Enemies', icon: 'swords', desc: 'A fiery dynamic filled with rivalry. Proceed with caution!', color: 'text-red-900' }, // fallback icon swords -> 'gavel' or 'block' if not available in MS
+            'E': { title: 'Enemies', icon: 'swords', desc: 'A fiery dynamic filled with rivalry. Proceed with caution!', color: 'text-red-900' }, 
             'S': { title: 'Siblings', icon: 'family_restroom', desc: 'A familial bond that feels like a protective sibling connection.', color: 'text-green-300' }
         };
 
         // Material Symbol fallbacks for specific names
         const iconMapping = {
-            'swords': 'sports_martial_arts', // Close enough representation
+            'swords': 'sports_martial_arts', 
             'rings': 'diamond'
         };
 
@@ -612,7 +709,7 @@ void main() {
             if (element) {
                 html2canvas(element, {
                     backgroundColor: null,
-                    scale: 2 // Higher resolution
+                    scale: 2 
                 }).then(canvas => {
                     const link = document.createElement('a');
                     link.download = 'flames-result.png';
