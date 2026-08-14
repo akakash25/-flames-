@@ -362,7 +362,7 @@
 </main>
 <!-- Footer (from JSON) -->
 <footer class="w-full text-center py-lg mb-4 bg-transparent mt-auto"><div class="flex flex-col items-center gap-4">
-<div class="w-20 h-20 rounded-full overflow-hidden shadow-lg shadow-shadow-tint border border-white/20 mx-auto mb-2"><img alt="AK Logo" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida/AP1WRLvcZxffBysJviPQta6qlozt9u-r7NT-sjC_IzTWjMIcedlm_3DwPOD3RK-nmV2_njCl_njVb4Ycxe-BeH79jC2WmdNXhceExebiAYQvwEkd4Tl_w8nVMCyRPLHuC7rxmfjZnFmawuhtA8vlelzgHkdpiHJdgUVxf8sUgGcpSV7xzu4Sj7BsS25GDHc2r6zRr4rCHUsG1PtuJaATc1NfZ4R897TD5Sm0Gr898AJvhGZZF8Grzjvrs-tIstYz"/></div>
+<div class="w-20 h-20 rounded-full overflow-hidden shadow-lg shadow-shadow-tint border border-white/20 mx-auto mb-2 flex items-center justify-center"><img alt="AK Logo" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AP1WRLuYsE5NvgePMobSs5_VKBu3Cnx6jq83GxCthI5l5TofGC96doc5RP5VLLgJhpMRBl9T8DNOPnPJBzOFLkpR3k9QHD5uhy4x5hcnKWkMDtyBOzHyJxyuzUon4BTeC_jpGVMzPsFHPy3B5Ufcp_VZ0etr3bRtudrF1tdQmaye6Vzp9DAGAkvk7WY8YNoH9fHPzMsuTjxoiFDTBVWOd5ehhSDHwUWyyIhGzsGa5yOuxvz_KFTNrd1H8A_Br5xb"/></div>
 <p class="text-label-md font-label-md text-theme-text-muted font-headline-lg">
         Made with <span class="text-love-red">❤️</span> by <span class="text-theme-text font-bold">AK AKASH</span>
 </p>
@@ -558,7 +558,7 @@ void main() {
         }
 
         // Music Player Logic
-       const tracks = [
+          const tracks = [
     { 
         name: "Love Story", 
         src: "audio/love_story.mp3" 
@@ -572,6 +572,7 @@ void main() {
         src: "audio/love_story_mix.mp3" 
     }
 ];
+
         window.currentTrackIndex = -1;
         const audioPlayer = document.getElementById('audio-player');
         const musicBtnLabel = document.getElementById('music-btn-label');
